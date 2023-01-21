@@ -1,0 +1,29 @@
+NAME
+       printf - print a formatted string
+
+SYNOPSIS
+       #include <main.h>
+
+       int printf(const char *format, ...);
+
+DESCRIPTION
+       The printf() function writes the string pointed to by format to stdout.  It  is  similar
+       to  the  fprintf()  function,  with the difference that it writes the output to stdout
+       instead of to a stream.
+
+       The format string consists of characters to be printed and format specifiers, which
+       are  special  characters  that  specify  how the following arguments are formatted.
+       For example, %d is a format specifier for an integer, and %f is a format  specifier
+       for a floating-point number.
+
+       The  number  of  arguments  and  the  types of the arguments must match the format
+       specifiers in the format string.
+
+RETURN VALUE
+       The printf() function returns the number of characters written to stdout.
+
+EXAMPLES
+       printf("Hello, world!\n");
+       printf("The answer is %d\n", 42);
+       printf("The value of pi is approximately %f\n", 3.14159);
+
