@@ -1,4 +1,5 @@
 #include <stdarg.h>
+#include <stdio>
 #include "main.h"
 /**
  * _printf - produces output according to a format
@@ -32,6 +33,20 @@ int _printf(const char *format, ...)
 						}
 					}
 					break;
+
+					 case 'd': 
+					{
+						int *d = va_arg(args, int *);
+						for (d = 0; d[f] != '\0'; f++)
+
+						{
+							printf(d[f]);
+						       count++;
+						}
+				break;
+						case 'i':
+		double x = va_arg(args, double);
+printf("%i\n" x);		
 				case '%':
 					_putchar('%'); /* print a literal '%' character */
 					count++; /* increment count by 1 */
@@ -51,3 +66,5 @@ int _printf(const char *format, ...)
 	va_end(args);
 	return (count);
 }
+
+
