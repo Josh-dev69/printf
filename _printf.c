@@ -1,6 +1,6 @@
 #include <stdarg.h>
-#include <stdio>
 #include "main.h"
+
 /**
  * _printf - produces output according to a format
  * @format: character string. The format string is composed of zero or more directives
@@ -8,7 +8,8 @@
  */
 int _printf(const char *format, ...)
 {
-	int i, j, count = 0;
+	int i, j, f, count = 0;
+	double e
 	va_list args;
 
 	va_start(args, format);
@@ -33,31 +34,41 @@ int _printf(const char *format, ...)
 						}
 					}
 					break;
-
-					 case 'd': 
-					{
-						int *d = va_arg(args, int *);
-						for (d = 0; d[f] != '\0'; f++)
-
-						{
-							printf(d[f]);
-						       count++;
-						}
-				break;
-						case 'i':
-		double x = va_arg(args, double);
-printf("%i\n" x);		
 				case '%':
 					_putchar('%'); /* print a literal '%' character */
 					count++; /* increment count by 1 */
 					break;
+
+				case 'd':
+					{
+						int *d = va_arg(args, int *)
+						for (d = 0; d[f] != '\0'; f++)
+						{
+							_putchar(d[f]);
+							count++;
+						}
+
+						break;
+
+				case 'i':
+						double *x = va_arg(args, double *);
+						for (e = 0; x[e] != '\0'; e++)
+						{
+							_putchar(x[e]);
+							count++;
+
+						}
+
+						break;
 				default:
 					_putchar(format[i]); /* print the current character */
 					count++; /* increment count by 1 */
 					break;
 			}
 		}
+
 		else
+
 		{
 			_putchar(format[i]);
 			count++;
@@ -66,5 +77,3 @@ printf("%i\n" x);
 	va_end(args);
 	return (count);
 }
-
-
