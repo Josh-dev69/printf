@@ -1,6 +1,7 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+#include <unistd.h>
 #include <stdarg.h>
 #include <stdio.h>
 
@@ -40,7 +41,6 @@ struct fmt
 typedef struct fmt fmt_t;
 
 int _printf(const char *format, ...);
-int _putchar(char str);
 int print_handle(const char *fmt, int *i, va_list list, char buffer[], int flags,
 		int width, int precision, int size);
 

@@ -1,5 +1,4 @@
 #include "main.h"
-#include <unistd.h>
 
 /****************** PRINT POINTER ******************/
 /**
@@ -76,7 +75,7 @@ int print_non_printable(va_list types, char buffer[], int flags, int width,
 	UNUSED(size);
 
 	if (str == NULL)
-		return (write(1, "(null)", 6));
+		return (write(1, "(nil)", 6));
 
 	while (str[i] != '\0')
 	{

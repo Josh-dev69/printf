@@ -1,5 +1,4 @@
 #include "main.h"
-#include <unistd.h>
 
 /************************* WRITE HANDLE *************************/
 /**
@@ -149,8 +148,7 @@ int write_unsigned(int is_negative, int ind, char buffer[], int flags, int width
 {
 	int length = BUFF_SIZE - ind - 1, i = 0;
 	char padd = ' ';
-	int j;
-	
+
 	UNUSED(is_negative);
 	UNUSED(size);
 

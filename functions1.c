@@ -1,5 +1,4 @@
 #include "main.h"
-#include <unistd.h>
 
 /************************* PRINT A STRING *************************/
 /**
@@ -44,7 +43,7 @@ int print_string(va_list types, char buffer[], int flags, int width,
 			/* Write the string and add padding on the right */
 			write(1, &str[0], length);
 			for (i = width - length; i > 0; i--)
-				_putchar(' ');
+				write(1, " ", 1);
 			return (width);
 		}
 		else
