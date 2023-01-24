@@ -42,8 +42,7 @@ int print_string(va_list types, char buffer[], int flags, int width,
 		if (flags & F_MINUS)
 		{
 			/* Write the string and add padding on the right */
-			for (i = 0; i < length; i++)
-				_putchar(str[i]);
+			write(1, &str[0], length);
 			for (i = width - length; i > 0; i--)
 				_putchar(' ');
 			return (width);
@@ -52,16 +51,13 @@ int print_string(va_list types, char buffer[], int flags, int width,
 		{
 			/* Add padding on the left and write the string */
 			for (i = width - length; i > 0; i--)
-				_putchar(' ');
-			for (i = 0; i < length; i++)
-				_putchar(str[i]);
+				write(1, " ", 1);
+			write(1, &str[0], length);
 			return (width);
 		}
 	}
 	/* Write the string without padding */
-	for (i = 0; i < length; i++)
-		_putchar(str[i]);
-	return (length);
+	return (write(1, str, length));
 }
 
 /************************* PRINT CHARACTER *************************/
@@ -165,8 +161,9 @@ int print_percent(va_list types, char buffer[],
 int print_binary(va_list types, char buffer[], int flags, int width, int precision,
 		int size)
 {
-	unsigned int n, m, a[32];
-	int count, i;
+	unsigned int n, i, m, a[32], sum;
+	int count;
+	char z;
 
 	UNUSED(buffer);
 	UNUSED(flags);
@@ -186,11 +183,13 @@ int print_binary(va_list types, char buffer[], int flags, int width, int precisi
 		a[i] = (n / m) % 2;
 	}
 	/* Write the bits to the standard output and count the number of bits */
-	for (i = 0, count = 0; i < 32; i++)
+	for (i = 0, sum = 0, count = 0; i < 32; i++)
 	{
-		if (a[i] || count)
+		sum = sum + a[i];
+		if (sum || i == 31)
 		{
-			_putchar('0' + a[i]);
+			z = '0' + a[i];
+			write(1, &z, 1);
 			count++;
 		}
 	}
