@@ -176,26 +176,12 @@ int write_unsigned(int is_negative, int ind, char buffer[], int flags, int width
 		buffer[i] = '\0';
 		/* If F_MINUS flag is set, output buffer first followed by padding */
 		if (flags & F_MINUS)
-		{
-			for (j = ind; j < length; j++)
-				_putchar(buffer[j]);
-			for (j = 0; j < i; j++)
-				_putchar(buffer[j]);
-			return (length + i);
-		}
+			return (write(1, &buffer[ind], length) + write(1, &buffer[0], i));
 		else /* If F_MINUS flag is not set, output padding first followed by buffer */
-		{
-			for (j = 0; j < i; j++)
-				_putchar(buffer[j]);
-			for (j = ind; j < length; j++)
-				_putchar(buffer[j]);
-			return (length + i);
-		}
+			return (write(1, &buffer[0], i) + write(1, &buffer[ind], length));
 	}
 	/* Output the buffer without extra padding */
-	for (j = ind; j < length; j++)
-		_putchar(buffer[j]);
-	return (length);
+	return (write(1, &buffer[ind], length));
 }
 
 /**
@@ -230,11 +216,7 @@ int write_pointer(char buffer[], int ind, int length, int width, int flags, char
 			if (extra_c)
 				buffer[--ind] = extra_c;
 			/* Write the final string to the buffer using _putchar function */
-			for (i = ind; i < length; i++)
-				_putchar(buffer[i]);
-			for (i = 3; i < width - length + 3; i++)
-				_putchar(buffer[i]);
-			return (length + width - length + 3);
+			return (write(1, &buffer[ind], length) + write(1, &buffer[3], i - 3));
 		}
 		/* Check if the string should be right-justified and extra_c should be added before the padding */
 		else if (!(flags & F_MINUS) && padd == ' ') /* extra char to left of buffer */
@@ -244,11 +226,7 @@ int write_pointer(char buffer[], int ind, int length, int width, int flags, char
 			if (extra_c)
 				buffer[--ind] = extra_c;
 			/* Write the final string to the buffer using _putchar function */
-			for (i = 3; i < width - length + 3; i++)
-				_putchar(buffer[i]);
-			for (i = ind; i < length; i++)
-				_putchar(buffer[i]);
-			return (length + width - length + 3);
+			return (write(1, &buffer[3], i - 3) + write(1, &buffer[ind], length));
 		}
 		/* Check if the string should be right-justified and extra_c should be added after the padding */
 		else if (!(flags & F_MINUS) && padd == '0')/* extra char to left of padd */
@@ -258,11 +236,8 @@ int write_pointer(char buffer[], int ind, int length, int width, int flags, char
 			buffer[1] = '0';
 			buffer[2] = 'x';
 			/* Write the final string to the buffer using putchar function */
-			for (i = padd_start; i < i - padd_start; i++)
-				_putchar(buffer[i]);
-			for (i = ind; i < length - (1 - padd_start) - 2; i++)
-				_putchar(buffer[i]);
-			return (i - padd_start + length - (1 - padd_start) - 2);
+			return (write(1, &buffer[padd_start], i - padd_start) +
+				write(1, &buffer[ind], length - (1 - padd_start) - 2));
 		}
 	}
 	buffer[--ind] = 'x';
@@ -270,7 +245,5 @@ int write_pointer(char buffer[], int ind, int length, int width, int flags, char
 	if (extra_c)
 		buffer[--ind] = extra_c;
 	/* Write the final string to the buffer using putchar function */
-	for (i = ind; i < BUFF_SIZE - ind - 1; i++)
-		putchar(buffer[i]);
-	return (BUFF_SIZE - ind - 1);
+	return (write(1, &buffer[ind], BUFF_SIZE - ind - 1));
 }
